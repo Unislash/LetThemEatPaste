@@ -110,12 +110,13 @@ namespace LetThemEatPaste {
             /**
              * This prefix will return the nearest nutrient paste meal or dispenser iff this is part of a job for a warden or doctor to feed a prisoner.
              */
-            public static bool Prefix(ref Thing __result, Pawn getter, Pawn eater) {
+            public static bool Prefix(ref Thing __result, Pawn getter, Pawn eater, ref ThingDef foodDef) {
 
                 Thing pasteSource = getPasteSource(getter, eater);
 
                 if (pasteSource != null) {
                     __result = pasteSource;
+                    foodDef = FoodUtility.GetFinalIngestibleDef(pasteSource, false);
                     return false;
                 }
 
